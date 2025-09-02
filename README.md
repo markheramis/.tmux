@@ -204,41 +204,62 @@ tmux may be controlled from an attached client by using a key combination of a
 prefix key, followed by a command key. This configuration uses `C-a` as a
 secondary prefix while keeping `C-b` as the default prefix. In the following
 list of key bindings:
-  - `<prefix>` means you have to either hit <kbd>Ctrl</kbd> + <kbd>a</kbd> or <kbd>Ctrl</kbd> + <kbd>b</kbd>
-  - `<prefix> c` means you have to hit <kbd>Ctrl</kbd> + <kbd>a</kbd> or <kbd>Ctrl</kbd> + <kbd>b</kbd> followed by <kbd>c</kbd>
-  - `<prefix> C-c` means you have to hit <kbd>Ctrl</kbd> + <kbd>a</kbd> or <kbd>Ctrl</kbd> + <kbd>b</kbd> followed by <kbd>Ctrl</kbd> + <kbd>c</kbd>
+
+| Key | Meaning |
+|---|---|
+| `<prefix>` | Press <kbd>Ctrl</kbd> + <kbd>a</kbd> or <kbd>Ctrl</kbd> + <kbd>b</kbd> |
+| `<prefix> c` | Press <kbd>Ctrl</kbd> + <kbd>a</kbd> or <kbd>Ctrl</kbd> + <kbd>b</kbd>, then <kbd>c</kbd> |
+| `<prefix> C-c` | Press <kbd>Ctrl</kbd> + <kbd>a</kbd> or <kbd>Ctrl</kbd> + <kbd>b</kbd>, then <kbd>Ctrl</kbd> + <kbd>c</kbd> |
 
 This configuration uses the following bindings:
 
-  - `<prefix> e` opens the `.local` customization file copy with the editor
-    defined by the `EDITOR` environment variable (defaults to `vim` when empty)
-  - `<prefix> r` reloads the configuration
-  - `C-l` clears both the screen **and** the tmux history
-
-  - `<prefix> C-c` creates a new session
-  - `<prefix> C-f` lets you switch to another session by name
-
-  - `<prefix> C-h` and `<prefix> C-l` let you navigate windows (default
-    `<prefix> n` is unbound and `<prefix> p` is repurposed)
-  - `<prefix> Tab` brings you to the last active window
-
-  - `<prefix> -` splits the current pane vertically
-  - `<prefix> _` splits the current pane horizontally
-  - `<prefix> h`, `<prefix> j`, `<prefix> k` and `<prefix> l` let you navigate
-    panes ala Vim
-  - `<prefix> H`, `<prefix> J`, `<prefix> K`, `<prefix> L` let you resize panes
-  - `<prefix> <` and `<prefix> >` let you swap panes
-  - `<prefix> +` maximizes the current pane to a new window
-
-  - `<prefix> m` toggles mouse mode on or off
-
-  - `<prefix> U` launches Urlscan (preferred) or Urlview, if available
-  - `<prefix> F` launches Facebook PathPicker, if available
-
-  - `<prefix> Enter` enters copy-mode
-  - `<prefix> b` lists the paste-buffers
-  - `<prefix> p` pastes from the top paste-buffer
-  - `<prefix> P` lets you choose the paste-buffer to paste from
+| Key Binding | Description  | Overwritten by this config? |
+|---|---|---|
+| `<prefix> C-c` | Creates a new session | Yes |
+| `<prefix> e` | Opens `~/.tmux.conf.local` with the editor defined by `$EDITOR` (defaults to `vim` when empty) | Yes |
+| `<prefix> r` | Reloads the configuration | Yes |
+| `<prefix> C-f` | Switches to another session by name | Yes |
+| `<prefix> C-h` and `<prefix> C-l` | Navigate windows (default `<prefix> n` and `<prefix> p` are unbound) | Yes |
+| `<prefix> Tab` | Brings you to the last active window | Yes |
+| `<prefix> h` | Navigate to the left pane (Vim style) | Yes |
+| `<prefix> j` | Navigate to the pane below (Vim style) | Yes |
+| `<prefix> k` | Navigate to the pane above (Vim style) | Yes |
+| `<prefix> l` | Navigate to the right pane (Vim style) | Yes |
+| `<prefix> H` | Resize pane left  | Yes |
+| `<prefix> J` | Resize pane down  | Yes |
+| `<prefix> K` | Resize pane up    | Yes |
+| `<prefix> L` | Resize pane right | Yes |
+| `<prefix> <` | Swap pane to the left | Yes |
+| `<prefix> >` | Swap pane to the right | Yes |
+| `<prefix> +` | Maximizes the current pane to a new window | Yes |
+| `<prefix> m` | Toggles mouse mode on or off | Yes |
+| `<prefix> U` | Launches Urlview (if available) | Yes |
+| `<prefix> F` | Launches Facebook PathPicker (if available) | Yes |
+| `<prefix> Enter` | Enters copy-mode | Yes |
+| `<prefix> b` | Lists the paste-buffers | Yes |
+| `<prefix> p` | Pastes from the top paste-buffer | Yes |
+| `<prefix> P` | Lets you choose the paste-buffer to paste from | Yes |
+| `C-l` | Clears both the screen and the history | Yes |
+| `<prefix> d` | Detach the current client | No |
+| `<prefix> &` | Kill the current window | No |
+| `<prefix> "` | Split window horizontally | No |
+| `<prefix> %` | Split window vertically | No |
+| `<prefix> o` | Select next pane | No |
+| `<prefix> x` | Kill the current pane | No |
+| `<prefix> z` | Toggle pane zoom (resize-pane -Z) | No |
+| `<prefix> ,` | Rename the current window | No |
+| `<prefix> .` | Move the current window | No |
+| `<prefix> f` | Find window | No |
+| `<prefix> w` | Choose window from a list | No |
+| `<prefix> t` | Show clock | No |
+| `<prefix> ?` | List all key bindings | No |
+| `<prefix> :` | Enter command prompt | No |
+| `<prefix> [` | Enter copy-mode | No |
+| `<prefix> ]` | Paste buffer | No |
+| `<prefix> n` | Select next window | No |
+| `<prefix> p` | Select previous window | No |
+| `<prefix> l` | Select last (previously used) window | No |
+| `<prefix> 0`–`9` | Select window by number | No |
 
 Additionally, `copy-mode-vi` matches [my own Vim configuration]
 
@@ -246,12 +267,14 @@ Additionally, `copy-mode-vi` matches [my own Vim configuration]
 
 Bindings for `copy-mode-vi`:
 
-  - `v` begins selection / visual mode
-  - `C-v` toggles between blockwise visual mode and visual mode
-  - `H` jumps to the start of line
-  - `L` jumps to the end of line
-  - `y` copies the selection to the top paste-buffer
-  - `Escape` cancels the current operation
+  | Key      | Action                                              |
+  |----------|-----------------------------------------------------|
+  | `v`      | Begins selection / visual mode                      |
+  | `C-v`    | Toggles between blockwise visual mode and visual mode |
+  | `H`      | Jumps to the start of line                          |
+  | `L`      | Jumps to the end of line                            |
+  | `y`      | Copies the selection to the top paste-buffer        |
+  | `Escape` | Cancels the current operation                       |
 
 It's also possible to preserve the tmux stock bindings by setting the
 `tmux_conf_preserve_stock_bindings` variable to `true` in your `.local`
