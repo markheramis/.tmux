@@ -1,10 +1,14 @@
 # backup old config
 if [ -f ~/.tmux.conf ]; then
-  cp ~/.tmux.conf ~/.tmux.conf.bak
+  mv ~/.tmux.conf ~/.tmux.conf.bak
 fi
 
-# symlink new config
-ln -s -f .tmux.conf ~/.tmux.conf
+# get absolute path to current working directory
+CWD="$(pwd)"
+TMUX_CONF_SRC="$CWD/.tmux.conf"
 
-# copy local config
-cp .tmux.conf.local ~/.tmux.conf.local
+# symlink new config using absolute path
+ln -s -f "$TMUX_CONF_SRC" ~/.tmux.conf
+
+# copy local config using absolute path
+cp "$CWD/.tmux.conf.local" ~/.tmux.conf.local
