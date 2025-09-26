@@ -508,3 +508,15 @@ tmux_conf_uninstall_plugins_on_reload=true
 # #     do not write below this line
 
 bind-key -T prefix s choose-tree -s
+
+# Page up and page down scrolling in copy mode
+bind -T copy-mode-vi PageUp send -X page-up
+bind -T copy-mode-vi PageDown send -X page-down
+bind -T copy-mode PageUp send -X page-up
+bind -T copy-mode PageDown send -X page-down
+
+# Alternative bindings for terminals that don't send PageUp/PageDown
+bind -T copy-mode-vi C-b send -X page-up
+bind -T copy-mode-vi C-f send -X page-down
+bind -T copy-mode C-b send -X page-up
+bind -T copy-mode C-f send -X page-down
